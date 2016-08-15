@@ -297,6 +297,10 @@ def deconvolution_2d(x, W, b=None, stride=1, pad=0,
             input size, stride and pad.
         use_cudnn (bool): If ``True``, then this function uses cuDNN if
             available.
+        deterministic (bool): The output of this function can be
+            non-deterministic when it uses cuDNN.
+            If this option is ``True``, then it forces cuDNN to use
+            a deterministic algorithm.
 
 
     The filter weight has four dimensions :math:`(c_I, c_O, k_H, k_W)`

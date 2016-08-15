@@ -281,6 +281,10 @@ def convolution_2d(x, W, b=None, stride=1, pad=0, use_cudnn=True,
             available.
         cover_all (bool): If True, all spatial locations are convoluted into
             some output pixels. It may make the output size larger.
+        deterministic (bool): The output of this function can be
+            non-deterministic when it uses cuDNN.
+            If this option is ``True``, then it forces cuDNN to use
+            a deterministic algorithm.
 
 
     Returns:
