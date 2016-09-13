@@ -208,6 +208,9 @@ class Convolution2DFunction(function.Function):
                     algo, workspace.data.ptr, workspace_size,
                     zero.data, x_desc.value, gx.data.ptr)
             else:
+                if self.deterministic:
+                    raise ValueError("'deterministic' option not available "
+                                     "for cuDNN versions < v4")
                 libcudnn.convolutionBackwardFilter_v2(
                     handle, one.data, x_desc.value, x.data.ptr,
                     gy_desc.value, gy.data.ptr, self.conv_desc.value,
@@ -284,7 +287,8 @@ def convolution_2d(x, W, b=None, stride=1, pad=0, use_cudnn=True,
         deterministic (bool): The output of this function can be
             non-deterministic when it uses cuDNN.
             If this option is ``True``, then it forces cuDNN to use
-            a deterministic algorithm.
+            a deterministic algorithm. This option is only available for
+            cuDNN version >= v4.
 
 
     Returns:
