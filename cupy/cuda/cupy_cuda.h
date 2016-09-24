@@ -104,7 +104,7 @@ int cuLaunchKernel(
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// cuda.h
+// cuda_runtime.h
 ///////////////////////////////////////////////////////////////////////////////
 
 typedef int cudaError_t;
@@ -189,7 +189,15 @@ int cudaMalloc(void** devPtr, size_t size) {
     return 0;
 }
 
+cudaError_t cudaHostAlloc(void** ptr, size_t size, unsigned int flags) {
+    return 0;
+}
+
 int cudaFree(void* devPtr) {
+    return 0;
+}
+
+cudaError_t cudaFreeHost(void* ptr) {
     return 0;
 }
 
