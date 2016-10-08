@@ -241,6 +241,9 @@ class Deconvolution2DFunction(function.Function):
                     algo, workspace.data.ptr, workspace_size,
                     zero.data, self.filter_desc.value, gW.data.ptr)
             else:
+                if self.deterministic:
+                    raise ValueError("'deterministic' option not available "
+                                     "for cuDNN versions < v4")
                 libcudnn.convolutionBackwardFilter_v2(
                     handle, one.data, gy_desc.value, gy.data.ptr,
                     gx_desc.value, x.data.ptr, self.conv_desc.value,
@@ -297,6 +300,11 @@ def deconvolution_2d(x, W, b=None, stride=1, pad=0,
             input size, stride and pad.
         use_cudnn (bool): If ``True``, then this function uses cuDNN if
             available.
+        deterministic (bool): The output of this function can be
+            non-deterministic when it uses cuDNN.
+            If this option is ``True``, then it forces cuDNN to use
+            a deterministic algorithm. This option is only available for
+            cuDNN version >= v4.
 
 
     The filter weight has four dimensions :math:`(c_I, c_O, k_H, k_W)`

@@ -36,6 +36,11 @@ class Convolution2D(link.Link):
             function uses to initialize ``bias``.
             May also be a callable that takes ``numpy.ndarray`` or
             ``cupy.ndarray`` and edits its value.
+        deterministic (bool): The output of this link can be
+            non-deterministic when it uses cuDNN.
+            If this option is ``True``, then it forces cuDNN to use
+            a deterministic algorithm. This option is only available for
+            cuDNN version >= v4.
 
     .. seealso::
        See :func:`chainer.functions.convolution_2d` for the definition of
