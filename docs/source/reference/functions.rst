@@ -242,6 +242,7 @@ contrastive
 crf1d
 ~~~~~
 .. autofunction:: crf1d
+.. autofunction:: argmax_crf1d
 
 cross_covariance
 ~~~~~~~~~~~~~~~~
